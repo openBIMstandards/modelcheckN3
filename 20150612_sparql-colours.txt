@@ -1,0 +1,42 @@
+prefix : <http://www.my-model.nl/ifcOWL#> 
+prefix model: <http://www.my-model.nl/ifcOWL/instances#> 
+prefix ifc: <http://www.buildingsmart-tech.org/ifcOWL#> 
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+prefix owl: <http://www.w3.org/2002/07/owl#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix dce: <http://purl.org/dc/elements/1.1/> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+
+select *
+{ 
+   GRAPH <http://localhost:3030/ifcowl/data/model>
+   { 
+      ?colour a ifc:IfcColourRgb;
+         ifc:red ?red;
+         ifc:green ?green;
+         ifc:blue ?blue.      
+      [] ifc:representations/rdf:rest*/rdf:first [
+            ifc:items/rdf:rest*/rdf:first [
+               ifc:styles/rdf:rest*/rdf:first [
+                  ifc:styles/rdf:rest*/rdf:first [
+                     ifc:styles/rdf:rest*/rdf:first [
+                        ifc:surfaceColour ?colour
+                     ]
+                  ]
+               ]
+            ]
+         ];
+         ifc:representedMaterial ?material.
+      ?material ifc:name ?materialname.
+      [] ifc:relatingMaterial [
+            ifc:forLayerSet [
+               ifc:materialLayers/rdf:rest*/rdf:first [
+                  a ifc:IfcMaterialLayer; 
+                  ifc:material ?material
+               ]
+            ]
+         ];
+         ifc:relatedObjects/rdf:rest*/rdf:first ?object.
+      ?object ifc:name ?name.
+   }  
+}

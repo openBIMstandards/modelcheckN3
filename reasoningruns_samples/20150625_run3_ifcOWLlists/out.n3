@@ -1,0 +1,29 @@
+#Processed by Id: euler.yap 8200 2015-06-24 22:15:21Z josd
+#eye --nope C:\Users\generic\Desktop\EYEtests\20150625_testrun2\inst.n3 C:\Users\generic\Desktop\EYEtests\20150625_testrun2\turnintordflists.n3 C:\Users\generic\Desktop\EYEtests\20150625_testrun2\run.n3 --pass
+
+PREFIX list: <http://www.w3.org/2000/10/swap/list#>
+PREFIX log: <http://www.w3.org/2000/10/swap/log#>
+PREFIX math: <http://www.w3.org/2000/10/swap/math#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX e: <http://eulersharp.sourceforge.net/2003/03swap/log-rules#>
+PREFIX ifcowl: <http://www.buildingsmart-tech.org/ifcOWL#>
+PREFIX : <http://example.org/test#>
+
+:L1 a ifcowl:IfcLabel_List.
+:L2 a ifcowl:IfcLabel_List.
+:L3 a ifcowl:IfcLabel_List.
+:L1 a rdf:List.
+:L2 a rdf:List.
+:L3 a rdf:List.
+:L1 ifcowl:hasListContent :c1.
+:L2 ifcowl:hasListContent :c2.
+:L3 ifcowl:hasListContent :c3.
+:L1 ifcowl:hasNext :L2.
+:L2 ifcowl:hasNext :L3.
+:L3 ifcowl:hasNext ifcowl:nil.
+:L1 :count 3 .
+:L1 :last :c3.
+:L1 :result (:c1 :c2 :c3).
+
+#ENDS 0.037 [sec] IO=14/15 TC=7 TP=26 BC=0 BP=0 PM=0 CM=0 FM=0 AM=0
+

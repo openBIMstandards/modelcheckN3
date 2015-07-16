@@ -1,0 +1,10 @@
+@prefix list: <http://www.w3.org/2000/10/swap/list#>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix e: <http://eulersharp.sourceforge.net/2003/03swap/log-rules#>.
+@prefix ifcowl: <http://www.buildingsmart-tech.org/ifcOWL#>.
+@prefix : <http://example.org/test#>.
+
+{?L a ifcowl:IfcLabel_List; ifcowl:hasListContent ?C; ifcowl:hasNext ?N} => {?L a rdf:List; rdf:first ?C; rdf:rest ?N}.
+{?L ifcowl:hasNext ifcowl:nil} => {?L rdf:rest rdf:nil}.

@@ -1,0 +1,96 @@
+@prefix ifc: <http://www.buildingsmart-tech.org/ifcOWL#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix model: <http://www.mu-model.nl/ifcOWL/instances#>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#>.
+
+
+# additional action to get all elements of lists 
+{?C rdfs:subClassOf [rdfs:subClassOf ifc:List]. } => {?C rdfs:subClassOf ifc:List}.
+{?P rdfs:domain [rdfs:subClassOf ifc:List]. ?X ?P ?Y. } => {?X a ifc:List}. 
+{?P rdfs:range  [rdfs:subClassOf ifc:List]. ?X ?P ?Y. } => {?Y a ifc:List}.
+
+{?C a ifc:List.} => {?C a rdf:List}.
+
+{?x ifc:Representations ?l.  ?l a rdf:List; list:member ?mem.} => {?x ifc:RepresentationsListItem ?mem}.
+{?x ifc:MaterialLayers ?l.   ?l a rdf:List; list:member ?mem.} => {?x ifc:MaterialLayersListItem ?mem}.
+{?x ifc:RepresentationMaps ?l.   ?l a rdf:List; list:member ?mem.} => {?x ifc:RepresentationMapsListItem ?mem}.
+{?x ifc:Representations ?l.   ?l a rdf:List; list:member ?mem.} => {?x ifc:RepresentationsListItem ?mem}.
+
+{ 
+  ?colour a ifc:IfcColourRgb.
+  [] ifc:RepresentationsListItem [
+		ifc:Items [
+		   ifc:Styles [
+			  ifc:Styles [
+				 ifc:Styles [
+					ifc:SurfaceColour ?colour
+				 ]
+			  ]
+		   ]
+		]
+	 ];
+	 ifc:RepresentedMaterial ?material.
+  [] ifc:RelatingMaterial [
+		ifc:ForLayerSet [
+		   ifc:MaterialLayersListItem [
+			  a ifc:IfcMaterialLayer; 
+			  ifc:Material ?material
+		   ]
+		]
+	 ];
+	 ifc:RelatedObjects ?object.
+}
+=>
+{
+   ?object ifc:HasColour ?colour.
+}.
+
+
+{ 
+   ?colour a ifc:IfcColourRgb.
+   [] ifc:Styles [
+	       ifc:Styles [
+	  	      ifc:Styles [
+			     ifc:SurfaceColour ?colour
+		      ]
+	       ]
+	    ];
+        ifc:Item ?areaSolid.
+     [] ifc:RelatingType [
+            ifc:RepresentationMapsListItem [
+               ifc:MappedRepresentation [
+                  ifc:Items ?areaSolid
+               ]
+            ]
+         ];
+         ifc:RelatedObjects ?object.
+}
+=>
+{
+   ?object ifc:HasColour ?colour.
+}.
+
+
+
+{ 
+   ?colour a ifc:IfcColourRgb.
+   [] ifc:Styles [
+	       ifc:Styles [
+	  	      ifc:Styles [
+			     ifc:SurfaceColour ?colour
+		      ]
+	       ]
+	    ];
+        ifc:Item ?areaSolid.
+    ?object ifc:Representation [
+               ifc:RepresentationsListItem [
+                  ifc:Items ?areaSolid
+            ]
+         ].
+}
+=>
+{
+   ?object ifc:HasColour ?colour.
+}.

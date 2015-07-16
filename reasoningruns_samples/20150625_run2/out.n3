@@ -1,0 +1,22 @@
+#Processed by Id: euler.yap 8200 2015-06-24 22:15:21Z josd
+#eye --nope C:\Users\generic\Desktop\EYEtests\20150625_testrun3\inst.n3 C:\Users\generic\Desktop\EYEtests\20150625_testrun1\rule2.n3 C:\Users\generic\Desktop\EYEtests\20150625_testrun3\rdfsvocab_small.n3 --pass
+
+PREFIX ppl: <http://example.org/people#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://example.org/test#>
+PREFIX e: <http://eulersharp.sourceforge.net/2003/03swap/log-rules#>
+PREFIX math: <http://www.w3.org/2000/10/swap/math#>
+PREFIX list: <http://www.w3.org/2000/10/swap/list#>
+PREFIX log: <http://www.w3.org/2000/10/swap/log#>
+
+ppl:Cindy <http://xmlns.com/foaf/0.1/knows> (ppl:John ppl:Linda ppl:Theo).
+<http://xmlns.com/foaf/0.1/knows> rdfs:range rdf:List.
+(ppl:John ppl:Linda ppl:Theo) a rdf:List.
+(ppl:John ppl:Linda ppl:Theo) :count 3 .
+(ppl:John ppl:Linda ppl:Theo) :last ppl:Theo.
+(ppl:John ppl:Linda ppl:Theo) :result (ppl:John ppl:Linda ppl:Theo).
+
+#ENDS 0.039 [sec] IO=9/6 TC=4 TP=15 BC=0 BP=0 PM=0 CM=0 FM=0 AM=0
+

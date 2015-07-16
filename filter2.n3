@@ -1,0 +1,21 @@
+@prefix ifc: <http://www.buildingsmart-tech.org/ifcOWL#>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix q: <http://www.w3.org/2004/ql#>.
+@prefix : <http://eulersharp.sourceforge.net/2004/04test/sample#>.
+@prefix my: <http://my.example.org#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#>.
+
+
+{
+   ?O ifc:HasColour ?colour. 
+   ?colour ifc:Red ?r; 
+      ifc:Green ?g; 
+	  ifc:Blue ?b; 
+	  my:colourType ?type
+} 
+=> 
+{?O :HasColour (?type ?r ?g ?b)}.

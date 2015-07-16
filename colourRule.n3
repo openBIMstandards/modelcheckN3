@@ -1,0 +1,46 @@
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+@prefix my: <http://my.example.org#>.
+@prefix ifc: <http://www.buildingsmart-tech.org/ifcOWL#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+{  
+   ?colour a ifc:IfcColourRgb;
+      ifc:Red   ?r; 
+      ifc:Green ?g; 
+	  ifc:Blue  ?b. 
+   (?g ?b) !math:difference math:absoluteValue ?dHue.
+   (((?g ?b) !math:sum ?dHue) !math:difference "2") math:quotient ?minCol.
+   (?r ?minCol) !math:difference math:greaterThan "0.1".   
+   (?dHue (?r ?minCol) !math:difference) !math:quotient math:lessThan "0.25".   
+} 
+=> 
+{ ?colour my:colourType "red".}.   
+
+
+{  
+   ?colour a ifc:IfcColourRgb;
+      ifc:Red   ?r; 
+      ifc:Green ?g; 
+	  ifc:Blue  ?b. 
+   (?r ?b) !math:difference math:absoluteValue ?dHue.
+   (((?r ?b) !math:sum ?dHue) !math:difference "2") math:quotient ?minCol.
+   (?g ?minCol) !math:difference math:greaterThan "0.1".   
+   (?dHue (?g ?minCol) !math:difference) !math:quotient math:lessThan "0.25".   
+} 
+=> 
+{ ?colour my:colourType "green".}.  
+
+{  
+   ?colour a ifc:IfcColourRgb;
+      ifc:Red   ?r; 
+      ifc:Green ?g; 
+	  ifc:Blue  ?b. 
+   (?r ?g) !math:difference math:absoluteValue ?dHue.
+   (((?r ?g) !math:sum ?dHue) !math:difference "2") math:quotient ?minCol.
+   (?b ?minCol) !math:difference math:greaterThan "0.1".   
+   (?dHue (?b ?minCol) !math:difference) !math:quotient math:lessThan "0.25".   
+} 
+=> 
+{ ?colour my:colourType "blue".}. 
